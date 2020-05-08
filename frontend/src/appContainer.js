@@ -1,13 +1,28 @@
 class AppContainer {
-    url = "http://localhost:300"
+    categories = [];
 
-    getQuiz() {
-        console.log("Getting activities...")
+    url = "http://localhost:3000";
 
-        fetch(this.url + '/quizzes')
+    getCategories() {
+        self = this;
+        console.log("Getting categories.....");
+        fetch(this.url + '/categories')
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => this.renderCategories(data))
 
-        .catch(err => alert(err))
+        .catch(err => alert(err));
+    }
+
+    renderCategories(data) {
+        const main = document.querySelector('.categories');
+        data.forEach(category => {
+          const h2 = document.createElement('h2')
+          h2.innerHTML = `${category.name}`
+          main.appendChild(h2)
+        });
+    }
+
+    categoriesPush(data) {
+        this.categories << data;
     }
 }
