@@ -4,7 +4,6 @@ class AppContainer {
     url = "http://localhost:3000";
 
     getCategories() {
-        self = this;
         console.log("Getting categories.....");
         fetch(this.url + '/categories')
         .then(resp => resp.json())
