@@ -1,0 +1,21 @@
+.categories {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.category {
+    display: grid;
+    text-align: center;
+    background-color: darkolivegreen;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+    .category:hover {
+        display: grid;
+        text-align: center;
+        background-color: rgb(180, 224, 102);
+        color: black;
+        border: 2px solid darkolivegreen;
+        border-radius: 20px;
+    }

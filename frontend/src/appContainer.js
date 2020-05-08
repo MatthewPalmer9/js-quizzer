@@ -16,12 +16,9 @@ class AppContainer {
         const main = document.querySelector('.categories');
         data.forEach(category => {
           const h2 = document.createElement('h2')
-          h2.innerHTML = `${category.name}`
+          h2.className = "category"
+          h2.innerHTML = `${category.name.toUpperCase()}`
           main.appendChild(h2)
         });
-    }
-
-    categoriesPush(data) {
-        this.categories << data;
     }
 }
