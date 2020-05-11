@@ -13,9 +13,20 @@
 }
     .category:hover {
         display: grid;
+        cursor: pointer;
         text-align: center;
         background-color: rgb(180, 224, 102);
         color: black;
         border: 2px solid darkolivegreen;
         border-radius: 20px;
     }
+
+#getQuizzesBtn {
+    display: grid;
+    grid-auto-flow: column;
+    margin-left: 45%;
+    margin-right: 49%;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+}
