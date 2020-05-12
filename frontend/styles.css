@@ -48,3 +48,15 @@
     color: white;
     font-size: 20px;
 }
+
+.quiz-title {
+    text-align: center;
+    background: black;
+    color: white;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.quiz-questions {
+    text-align: center;
+}

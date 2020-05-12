@@ -163,17 +163,17 @@ function renderSubcategories(data) {
 
       fstQuiz = () => {
          params = document.querySelector('div.subCategories').children[0].innerText;
-         renderQuiz(params);
+         getQuizName(params);
       }
 
       sndQuiz = () => {
          params = document.querySelector('div.subCategories').children[1].innerText;
-         renderQuiz(params);
+         getQuizName(params);
       }
 
       thrdQuiz = () => {
          params = document.querySelector('div.subCategories').children[2].innerText;
-         renderQuiz(params);
+         getQuizName(params);
       }
 
       subChild1.addEventListener('click', fstQuiz, {once: true});
@@ -182,15 +182,77 @@ function renderSubcategories(data) {
    }
 
    // QUIZ RENDERING
-   function renderQuiz(params) {
+
+   // ------------------------------------------//
+   function getQuizName(params) {
       // removePageContent();
 
       fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}`)
       .then(resp => resp.json())
-      .then(data => data.forEach((dataType) => {
-         console.log(dataType.name);
-      }));
+      .then(data => renderQuizName(data))
    }
+   // ------------------------------------------//
+
+   // ------------------------------------------//
+   function removePageContent(){
+      const main = document.querySelector('.categories');
+      const subMain = document.querySelector('.subCategories');
+      main.parentNode.removeChild(main);
+      subMain.parentNode.removeChild(subMain);
+
+      // const main = document.querySelector('.categories');
+      // main.parentNode.removeChild(main);
+   }
+   // ------------------------------------------//
+
+   // ------------------------------------------//
+   function renderQuizName(data) {
+      const quizTitle = document.createElement('div');
+      quizTitle.className = 'quiz-title';
+      document.body.appendChild(quizTitle)
+
+      removePageContent();
+
+      data.forEach((quizHeader) => {
+         const main = document.querySelector('div.quiz-title');
+         const h1 = document.createElement('h1');
+         h1.innerText = `${quizHeader.name}`
+         main.appendChild(h1);
+      });
+      
+      getQuizQuestions();
+   }
+   // ------------------------------------------//
+
+   // ------------------------------------------//
+   function getQuizQuestions(){
+      const main = document.createElement('div');
+      main.className = "quiz-questions"
+      document.body.appendChild(main);
+
+
+
+      fetch("http://localhost:3000/questions/football")
+      .then(resp => resp.json())
+      .then(data => renderQuestions(data))
+
+   }
+   // ------------------------------------------//
+
+   // ------------------------------------------//
+   function renderQuestions(data) {
+
+      fetch("http://localhost:3000/answers/football")
+
+      
+      data.forEach((question) => {
+         const main = document.querySelector('div.quiz-questions');
+         const h1 = document.createElement('h1');
+         h1.innerText = `${question.name}`;
+         main.appendChild(h1);
+      })
+   }
+   // ------------------------------------------//
 
    subBtn.forEach((btn) => {
       btn.addEventListener('click', getQuiz);
