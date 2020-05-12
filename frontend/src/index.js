@@ -1,7 +1,14 @@
 let app = new AppContainer;
 app.subCategoryClickControl = 0;
+theAnswers = [];
 
 // -------------------------------------------------//
+
+function pushResult(data){
+   data.forEach((ans) => {
+      theAnswers.push(ans.description);
+   })
+}
 
 // BUTTON / EVENT HANDLING
 const btn = document.getElementById('getQuizzesBtn');
@@ -243,14 +250,34 @@ function renderSubcategories(data) {
    function renderQuestions(data) {
 
       fetch("http://localhost:3000/answers/football")
+      .then(resp => resp.json())
+      .then(data => pushResult(data))
 
       
       data.forEach((question) => {
          const main = document.querySelector('div.quiz-questions');
          const h1 = document.createElement('h1');
+         h1.className = "questions";
          h1.innerText = `${question.name}`;
          main.appendChild(h1);
       })
+      setTimeout(function() {
+         const abcd = document.querySelector('h1.questions');
+         const firsth3 = document.createElement('h3');
+         firsth3.innerHTML = this.theAnswers[0];
+         const secondh3 = document.createElement('h3');
+         secondh3.innerText = "another test";
+         const thirdh3 = document.createElement('h3');
+         thirdh3.innerText = "and another";
+         const forthh3 = document.createElement('h3');
+         forthh3.innerText = "surprise, another";
+
+         abcd.appendChild(firsth3);
+         abcd.appendChild(secondh3);
+         abcd.appendChild(thirdh3);
+         abcd.appendChild(forthh3);
+      }, 100);
+
    }
    // ------------------------------------------//
 

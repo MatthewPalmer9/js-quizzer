@@ -1,5 +1,6 @@
 class AppContainer {
     categories = [];
+    theAnswers = [];
     categoryClickControl = 0;
     subCategoryClickControl = 0;
 

@@ -4,6 +4,6 @@ class QuestionsController < ApplicationController
     end 
 
     def football 
-        render :json => Question.where(:subcategory_id => 1).to_json(:except => [:created_at, :updated_at])
+        render :json => Question.where(:quiz_id => 1).to_json(:except => [:created_at, :updated_at])
     end 
 end
