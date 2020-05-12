@@ -7,10 +7,6 @@ class AppContainer {
 
     // CATEGORIES //
 
-    createSubcateorgies() {
-
-    }
-
     getOrRemoveCategories() {
         if(this.categoryClickControl === 0) {
             let main = document.createElement("div");
@@ -20,7 +16,7 @@ class AppContainer {
 
             fetch(this.url + '/categories')
             .then(resp => resp.json())
-            .then(data => this.renderCategories(data))
+            .then(data => renderCategories(data))
 
             .catch(err => alert(err));
 
@@ -48,21 +44,5 @@ class AppContainer {
         });
     }
 
-    renderSubcategories(data) {
-        const main = document.querySelector('.subCategories')
-        data.forEach(category => {
-            const h4 = document.createElement('h4')
-            h4.className = "subCategory"
-            h4.innerHTML = `${data.name.toUpperCase()}`
-            main.appendChild(h4)
-        })
-    }
-
-    // getSubCats(params) {
-    //     if(params === "SPORTS") {
-    //         fetch(this.url + '/subcategories/sports')
-    //         .then(resp => resp.json())
-    //         .then(data => console.log(data));
-    //     }
-    // }
+    
 }

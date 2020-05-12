@@ -1,48 +1,10 @@
-const app = new AppContainer;
+let app = new AppContainer;
+app.subCategoryClickControl = 0;
 
+// -------------------------------------------------//
+
+// BUTTON / EVENT HANDLING
 const btn = document.getElementById('getQuizzesBtn');
-
-function getSubCats(params) {
-   if(params === "SPORTS") {
-      fetch("http://localhost:3000" + '/subcategories/sports')
-      .then(resp => resp.json())
-      .then(data => renderSubcategories(data));
-   } 
-   if(params === "MOVIES") {
-      fetch("http://localhost:3000" + '/subcategories/movies')
-      .then(resp => resp.json())
-      .then(data => renderSubcategories(data));
-   } 
-   if(params === "VIDEO GAMES") {
-      fetch("http://localhost:3000" + '/subcategories/video_games')
-       .then(resp => resp.json())
-       .then(data => renderSubcategories(data));
-   }
-}
-
-function getSubCategory() {
-   const sub = document.querySelectorAll(".category");
-   const child1 = document.querySelector('div').children[0];
-   const child2 = document.querySelector('div').children[1];
-   const child3 = document.querySelector('div').children[2];
-
-
-   child1.addEventListener('click', (e) => {
-      this.getSubCats("SPORTS");
-      child1.removeEventListener('click', (e));
-   })
-
-   child2.addEventListener('click', (e) => {
-      getSubCats("MOVIES");
-      child1.removeEventListener('click', (e));
-   })
-
-   child3.addEventListener('click', (e) => {
-      getSubCats("VIDEO GAMES");
-      child1.removeEventListener('click', (e));
-   })
-}
-
 
 function setCategory(){
    const cat = document.querySelectorAll('h2.category');
@@ -56,16 +18,6 @@ function setCategory(){
    )
 }
 
-function renderSubcategories(data) {
-   const main = document.querySelector('.subCategories')
-   data.forEach(category => {
-      const h4 = document.createElement('h4')
-      h4.className = "subCategory"
-      h4.innerHTML = `${category.name.toUpperCase()}`
-      main.appendChild(h4)
-   })
-}
-
 btn.addEventListener('click', () =>
    app.getOrRemoveCategories()
 );
@@ -75,3 +27,153 @@ btn.addEventListener('click', () =>(
       setCategory()
    }, 90)
 ))
+// END BUTTON / EVENT HANDLING
+
+// -------------------------------------------------//
+
+// FIRST 
+function getOrRemoveCategories() {
+   if(this.categoryClickControl === 0) {
+       let main = document.createElement("div");
+       main.className += 'categories';
+       document.body.appendChild(main);
+
+
+       fetch(this.url + '/categories')
+       .then(resp => resp.json())
+       .then(data => renderCategories(data))
+
+       .catch(err => alert(err));
+
+       this.categoryClickControl += 1;
+
+   } else if(this.categoryClickControl === 1) {
+       const main = document.querySelector('.categories');
+       main.parentNode.removeChild(main);
+       this.categoryClickControl -= 1;
+   } else {
+   }
+}
+
+// SECOND
+function renderCategories(data) {
+   const main = document.querySelector('.categories');
+   data.forEach(category => {
+     const h2 = document.createElement('h2')
+     h2.className = "category"
+     h2.innerHTML = `${category.name.toUpperCase()}`
+     main.appendChild(h2)
+   });
+}
+
+// THIRD
+function getSubCategory() {
+   const child1 = document.querySelector('div').children[0];
+   const child2 = document.querySelector('div').children[1];
+   const child3 = document.querySelector('div').children[2];
+
+   sports = () => {
+      renderSubCategory("SPORTS")
+   }
+
+   movies = () => {
+      renderSubCategory("MOVIES")
+   }
+
+   videoGames = () => {
+      renderSubCategory("VIDEO GAMES")
+   }
+
+
+   child1.addEventListener('click', sports, {once: true});
+
+   child2.addEventListener('click', movies, {once: true})
+
+   child3.addEventListener('click', videoGames, {once: true})
+}
+
+// FORTH
+function renderSubCategory(params) {
+      if(params === "SPORTS") {
+         fetch("http://localhost:3000" + '/subcategories/sports')
+         .then(resp => resp.json())
+         .then(data => renderSubcategories(data));
+      } else if(params === "MOVIES") {
+         fetch("http://localhost:3000" + '/subcategories/movies')
+         .then(resp => resp.json())
+         .then(data => renderSubcategories(data));
+      } else if(params === "VIDEO GAMES") {
+         fetch("http://localhost:3000" + '/subcategories/video_games')
+         .then(resp => resp.json())
+         .then(data => renderSubcategories(data));
+      }
+}
+
+// FIFTH
+function renderSubcategories(data) {
+   currentData = []
+   currentData.push(data)
+
+   if(app.subCategoryClickControl === 0) {
+      let subMain = document.createElement("div")
+      subMain.className = "subCategories";
+      document.body.appendChild(subMain);
+
+      data.forEach((subCat) => {
+         h4 = document.createElement('h4');
+         h4.className = "subCategory";
+         h4.innerHTML = `${subCat.name.toUpperCase()}`;
+         subMain.appendChild(h4);
+      })
+
+
+      app.subCategoryClickControl += 1;
+   } else if(app.subCategoryClickControl === 1) {
+      if(data === currentData[0]) {
+         destroy = () => {
+            const subCat = document.querySelector('.subCategories');
+            subCat.parentNode.removeChild(subCat);
+            app.subCategoryClickControl = 0;
+            currentData.pop();
+         }
+         destroy();
+
+      } else if(data !== currentData[0]) {
+         currentData.pop();
+         currentData.push(data);
+
+         data.forEach((subCat) => {
+            h4 = document.createElement('h4');
+            h4.className = "subCategory";
+            h4.innerHTML = `${subCat.name.toUpperCase()}`;
+            subMain.appendChild(h4);
+         })
+         app.subCategoryClickControl = 1;
+      }
+   }
+
+   // SUB CATEGORY CLICK HANDLING 
+
+   const subBtn = document.querySelectorAll('.subCategory')
+
+   getQuiz = () => {
+      removePageContent();
+
+      child1 = document.querySelector('div.subCategories').children[0];
+      child2 = document.querySelector('div.subCategories').children[1];
+      child3 = document.querySelector('div.subCategories').children[2];
+
+      renderQuiz = () => {
+         if(child1)
+      }
+
+      child1.addEventListener('click', renderQuiz, {once: true})
+      child2.addEventListener('click', renderQuiz, {once: true})
+   }
+   subBtn.forEach((btn) => {
+      btn.addEventListener('click', getQuiz);
+   });
+      
+}
+
+

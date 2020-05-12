@@ -21,6 +21,24 @@
         border-radius: 20px;
     }
 
+.subCategory {
+    display: grid;
+    text-align: center;
+    background-color: rgb(28, 99, 156);
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+    .subCategory:hover {
+        display: grid;
+        cursor: pointer;
+        text-align: center;
+        background-color: rgb(57, 101, 182);
+        color: black;
+        border: 2px solid rgb(75, 177, 224);
+        border-radius: 20px;
+    }
+
 #getQuizzesBtn {
     display: grid;
     grid-auto-flow: column;
