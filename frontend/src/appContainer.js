@@ -1,11 +1,18 @@
 class AppContainer {
     categories = [];
-    clickControl = 0;
+    categoryClickControl = 0;
+    subCategoryClickControl = 0;
 
     url = "http://localhost:3000";
 
+    // CATEGORIES //
+
+    createSubcateorgies() {
+
+    }
+
     getOrRemoveCategories() {
-        if(this.clickControl === 0) {
+        if(this.categoryClickControl === 0) {
             let main = document.createElement("div");
             main.className += 'categories';
             document.body.appendChild(main);
@@ -17,17 +24,21 @@ class AppContainer {
 
             .catch(err => alert(err));
 
-            this.clickControl += 1;
+            this.categoryClickControl += 1;
 
-        } else if(this.clickControl === 1) {
+        } else if(this.categoryClickControl === 1) {
             const main = document.querySelector('.categories');
             main.parentNode.removeChild(main);
-            this.clickControl -= 1;
+            this.categoryClickControl -= 1;
         } else {
         }
     }
 
     renderCategories(data) {
+        let subMain = document.createElement("div")
+        subMain.className = "subCategories"
+        document.body.appendChild(subMain)
+
         const main = document.querySelector('.categories');
         data.forEach(category => {
           const h2 = document.createElement('h2')
@@ -36,4 +47,22 @@ class AppContainer {
           main.appendChild(h2)
         });
     }
+
+    renderSubcategories(data) {
+        const main = document.querySelector('.subCategories')
+        data.forEach(category => {
+            const h4 = document.createElement('h4')
+            h4.className = "subCategory"
+            h4.innerHTML = `${data.name.toUpperCase()}`
+            main.appendChild(h4)
+        })
+    }
+
+    // getSubCats(params) {
+    //     if(params === "SPORTS") {
+    //         fetch(this.url + '/subcategories/sports')
+    //         .then(resp => resp.json())
+    //         .then(data => console.log(data));
+    //     }
+    // }
 }
