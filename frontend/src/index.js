@@ -157,19 +157,41 @@ function renderSubcategories(data) {
    const subBtn = document.querySelectorAll('.subCategory')
 
    getQuiz = () => {
-      removePageContent();
+      subChild1 = document.querySelector('div.subCategories').children[0];
+      subChild2 = document.querySelector('div.subCategories').children[1];
+      subChild3 = document.querySelector('div.subCategories').children[2];
 
-      child1 = document.querySelector('div.subCategories').children[0];
-      child2 = document.querySelector('div.subCategories').children[1];
-      child3 = document.querySelector('div.subCategories').children[2];
-
-      renderQuiz = () => {
-         if(child1)
+      fstQuiz = () => {
+         params = document.querySelector('div.subCategories').children[0].innerText;
+         renderQuiz(params);
       }
 
-      child1.addEventListener('click', renderQuiz, {once: true})
-      child2.addEventListener('click', renderQuiz, {once: true})
+      sndQuiz = () => {
+         params = document.querySelector('div.subCategories').children[1].innerText;
+         renderQuiz(params);
+      }
+
+      thrdQuiz = () => {
+         params = document.querySelector('div.subCategories').children[2].innerText;
+         renderQuiz(params);
+      }
+
+      subChild1.addEventListener('click', fstQuiz, {once: true});
+      subChild2.addEventListener('click', sndQuiz, {once: true});
+      subChild3.addEventListener('click', thrdQuiz, {once: true});
    }
+
+   // QUIZ RENDERING
+   function renderQuiz(params) {
+      // removePageContent();
+
+      fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}`)
+      .then(resp => resp.json())
+      .then(data => data.forEach((dataType) => {
+         console.log(dataType.name);
+      }));
+   }
+
    subBtn.forEach((btn) => {
       btn.addEventListener('click', getQuiz);
    });
