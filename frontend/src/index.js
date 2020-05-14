@@ -194,10 +194,11 @@ renderSubcategories = (data) => {
    // ------------------------------------------//
    getQuizName = (params) => {
       // removePageContent();
+      params = params
 
       fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}`)
       .then(resp => resp.json())
-      .then(data => renderQuizName(data))
+      .then(data => renderQuizName(data, params))
    }
    // ------------------------------------------//
 
@@ -212,13 +213,18 @@ renderSubcategories = (data) => {
    // ------------------------------------------//
 
    // ------------------------------------------//
-   renderQuizName = (data) => {
+   renderQuizName = (data, params) => {
+
+      params = params;
+      //Creates the " <div class="quiz-title"></div> "
       const quizTitle = document.createElement('div');
       quizTitle.className = 'quiz-title';
       document.body.appendChild(quizTitle)
 
+      //Removes the other page content
       removePageContent();
 
+      //Grabs "div.quiz-title" and creates an <h1> with the Quiz Name inside.
       data.forEach((quizHeader) => {
          const main = document.querySelector('div.quiz-title');
          const h1 = document.createElement('h1');
@@ -226,48 +232,113 @@ renderSubcategories = (data) => {
          main.appendChild(h1);
       });
       
-      getQuizQuestions(data);
+      // Uses this same "quiz" data to run this function
+      getQuizQuestions(data, params);
    }
    // ------------------------------------------//
 
    // ------------------------------------------//
-   getQuizQuestions = () => {
+   getQuizQuestions = (data, params) => {
+      params = params;
 
       // Creates the " <div class="quiz-questions"></div> "
       const main = document.createElement('div');
       main.className = "quiz-questions"
       document.body.appendChild(main);
 
-      //Conditional: Grabs the innerText of
-
-      fetch("http://localhost:3000/questions/football")
+      // Fetches the questions passed in by (data) & executes " renderQuestions(data) "
+      fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}/questions`)
       .then(resp => resp.json())
-      .then(data => renderQuestions(data))
+      .then(data => renderQuestions(data, params))
 
    }
    // ------------------------------------------//
 
    // ------------------------------------------//
-   renderQuestions = (data) => {
+   renderQuestions = (data, params) => {
 
-      data.forEach((question) => {
+      // Uses the data to iterate over each question
+      data.forEach((question) => 
+      {
+         // Grabs "div.quiz-questions" and creates a <div class="asked-question"></div>
+         // Then creates an <h1> for each question 
+         // with the actual question text inside.
          const main = document.querySelector('div.quiz-questions');
+         const div = document.createElement('div');
+         div.className = "asked-question";
+         main.appendChild(div);
+
+         const ques = document.querySelectorAll(".asked-question");
          const h1 = document.createElement('h1');
-         h1.className = "questions";
+         const choicesDiv = document.createElement('div');
+         choicesDiv.className = "choices";
+
+         h1.className = "main-question";
          h1.innerText = `${question.name}`;
-         main.appendChild(h1);
+         ques.forEach((question) => {
+            question.appendChild(h1);
+            question.appendChild(choicesDiv);
+         })
       })
 
 
-
-      renderAnswers();
+      // Renders the multiple choice answers
+      getAnswers(params);
    }
 
-   renderAnswers = () => {
-      fetch("http://localhost:3000/answers/football")
-      .then(resp => resp.json())
-      .then(data => pushResult(data))
+   getAnswers = (params) => {
 
+      // Grabs each div.question & creates 4 <h3></h3> to each one
+      const questions = document.querySelectorAll('.choices');
+      questions.forEach((question) => {
+         ans1 = document.createElement('h3');
+         ans2 = document.createElement('h3');
+         ans3 = document.createElement('h3');
+         ans4 = document.createElement('h3');
+         ans5 = document.createElement('h3');
+
+         ans1.className = "choice";
+         ans2.className = "choice";
+         ans3.className = "choice";
+         ans4.className = "choice";
+         ans5.className = "choice";
+
+         // Appends the h3.choice(s) to the DOM
+         question.appendChild(ans1);
+         question.appendChild(ans2);
+         question.appendChild(ans3);
+         question.appendChild(ans4);
+      });
+
+      // Fetches the Answers for this quiz
+      fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}/questions/answers`)
+      .then(resp => resp.json())
+      .then(answers => renderAnswers(answers))
+
+   }
+
+   renderAnswers = (answers) => {
+      app.answers.length = 0;
+      const choices = document.querySelectorAll('.choice');
+
+      answers.forEach((answer) => {
+         app.answers.push(answer.description);
+      })
+
+      setTimeout(function() {
+         //Question 1
+         choices[0].innerText = app.answers[0];
+         choices[1].innerText = app.fakeFBAnswers["Q1"][0];
+         choices[2].innerText = app.fakeFBAnswers["Q1"][1];
+         choices[3].innerText = app.fakeFBAnswers["Q1"][2];
+         
+         //Question 2
+         choices[5].innerText = app.answers[1];
+         choices[8].innerText = app.answers[2];
+         choices[12].innerText = app.answers[3];
+         choices[16].innerText = app.answers[4];
+      }, 500);
+      
    }
    // ------------------------------------------//
 

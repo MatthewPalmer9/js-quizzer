@@ -5,6 +5,14 @@ class QuizzesController < ApplicationController
 
     def football 
         render :json => Quiz.where(:subcategory_id => 1).to_json(:except => [:created_at, :updated_at])
+    end
+
+    def football_questions
+        render :json => Question.where(:subcategory_id => 1).to_json(:except => [:created_at, :updated_at])
+    end 
+
+    def football_answers
+        render :json => Answer.where(:quiz_id => 1).to_json(:except => [:created_at, :updated_at])
     end 
 
     def basketball

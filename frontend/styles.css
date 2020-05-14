@@ -60,3 +60,18 @@
 .quiz-questions {
     text-align: center;
 }
+
+.choices {
+    display: grid;
+    grid-auto-flow: column;
+    width: 50%;
+    margin-left: 25%;
+}
+
+    .choice {
+        border: 1px solid black;
+        padding: 20%;
+    }
+        .choice:hover {
+            background-color: skyblue;
+        }

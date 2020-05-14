@@ -1,6 +1,15 @@
 class AppContainer {
     categories = [];
-    theAnswers = [];
+
+    
+    // Answers
+    answers = [];
+        fakeFBAnswers = {
+            Q1: ["51", "67", "83"],
+            Q2: []
+        };
+
+
     categoryClickControl = 0;
     subCategoryClickControl = 0;
 

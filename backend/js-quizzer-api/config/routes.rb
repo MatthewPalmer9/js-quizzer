@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   get '/quizzes/soccer' => "quizzes#soccer"
 
     # Sports Quiz Question Routes
-    get '/questions/football' => "questions#football"
+    get '/quizzes/football/questions' => "quizzes#football_questions"
 
   # Quiz Answers Routes
-  get '/answers/football' => "answers#football"
+  get '/quizzes/football/questions/answers' => "quizzes#football_answers"
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
