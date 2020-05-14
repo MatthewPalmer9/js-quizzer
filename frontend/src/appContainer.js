@@ -31,19 +31,5 @@ class AppContainer {
         }
     }
 
-    renderCategories(data) {
-        let subMain = document.createElement("div")
-        subMain.className = "subCategories"
-        document.body.appendChild(subMain)
-
-        const main = document.querySelector('.categories');
-        data.forEach(category => {
-          const h2 = document.createElement('h2')
-          h2.className = "category"
-          h2.innerHTML = `${category.name.toUpperCase()}`
-          main.appendChild(h2)
-        });
-    }
-
     
 }

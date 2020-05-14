@@ -13,7 +13,7 @@ function pushResult(data){
 // BUTTON / EVENT HANDLING
 const btn = document.getElementById('getQuizzesBtn');
 
-function setCategory(){
+setCategory = () => {
    const cat = document.querySelectorAll('h2.category');
    cat.forEach((category) =>
       category.addEventListener('click', () => {
@@ -26,7 +26,7 @@ function setCategory(){
 }
 
 btn.addEventListener('click', () =>
-   app.getOrRemoveCategories()
+   this.getOrRemoveCategories()
 );
 
 btn.addEventListener('click', () =>(
@@ -38,32 +38,33 @@ btn.addEventListener('click', () =>(
 
 // -------------------------------------------------//
 
-// FIRST 
-function getOrRemoveCategories() {
-   if(this.categoryClickControl === 0) {
+// FIRST
+
+getOrRemoveCategories = () => {
+   if(app.categoryClickControl === 0) {
        let main = document.createElement("div");
        main.className += 'categories';
        document.body.appendChild(main);
 
 
-       fetch(this.url + '/categories')
+       fetch(app.url + '/categories')
        .then(resp => resp.json())
        .then(data => renderCategories(data))
 
        .catch(err => alert(err));
 
-       this.categoryClickControl += 1;
+       app.categoryClickControl += 1;
 
-   } else if(this.categoryClickControl === 1) {
+   } else if(app.categoryClickControl === 1) {
        const main = document.querySelector('.categories');
        main.parentNode.removeChild(main);
-       this.categoryClickControl -= 1;
+       app.categoryClickControl -= 1;
    } else {
    }
 }
 
 // SECOND
-function renderCategories(data) {
+renderCategories = (data) => {
    const main = document.querySelector('.categories');
    data.forEach(category => {
      const h2 = document.createElement('h2')
@@ -74,7 +75,7 @@ function renderCategories(data) {
 }
 
 // THIRD
-function getSubCategory() {
+getSubCategory = () => {
    const child1 = document.querySelector('div').children[0];
    const child2 = document.querySelector('div').children[1];
    const child3 = document.querySelector('div').children[2];
@@ -100,7 +101,7 @@ function getSubCategory() {
 }
 
 // FORTH
-function renderSubCategory(params) {
+renderSubCategory = (params) => {
       if(params === "SPORTS") {
          fetch("http://localhost:3000" + '/subcategories/sports')
          .then(resp => resp.json())
@@ -117,7 +118,7 @@ function renderSubCategory(params) {
 }
 
 // FIFTH
-function renderSubcategories(data) {
+renderSubcategories = (data) => {
    currentData = []
    currentData.push(data)
 
@@ -191,7 +192,7 @@ function renderSubcategories(data) {
    // QUIZ RENDERING
 
    // ------------------------------------------//
-   function getQuizName(params) {
+   getQuizName = (params) => {
       // removePageContent();
 
       fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}`)
@@ -201,19 +202,17 @@ function renderSubcategories(data) {
    // ------------------------------------------//
 
    // ------------------------------------------//
-   function removePageContent(){
+   removePageContent = () => {
+      //Removes the page content and prepares the space for the quiz
       const main = document.querySelector('.categories');
       const subMain = document.querySelector('.subCategories');
       main.parentNode.removeChild(main);
       subMain.parentNode.removeChild(subMain);
-
-      // const main = document.querySelector('.categories');
-      // main.parentNode.removeChild(main);
    }
    // ------------------------------------------//
 
    // ------------------------------------------//
-   function renderQuizName(data) {
+   renderQuizName = (data) => {
       const quizTitle = document.createElement('div');
       quizTitle.className = 'quiz-title';
       document.body.appendChild(quizTitle)
@@ -227,17 +226,19 @@ function renderSubcategories(data) {
          main.appendChild(h1);
       });
       
-      getQuizQuestions();
+      getQuizQuestions(data);
    }
    // ------------------------------------------//
 
    // ------------------------------------------//
-   function getQuizQuestions(){
+   getQuizQuestions = () => {
+
+      // Creates the " <div class="quiz-questions"></div> "
       const main = document.createElement('div');
       main.className = "quiz-questions"
       document.body.appendChild(main);
 
-
+      //Conditional: Grabs the innerText of
 
       fetch("http://localhost:3000/questions/football")
       .then(resp => resp.json())
@@ -247,13 +248,8 @@ function renderSubcategories(data) {
    // ------------------------------------------//
 
    // ------------------------------------------//
-   function renderQuestions(data) {
+   renderQuestions = (data) => {
 
-      fetch("http://localhost:3000/answers/football")
-      .then(resp => resp.json())
-      .then(data => pushResult(data))
-
-      
       data.forEach((question) => {
          const main = document.querySelector('div.quiz-questions');
          const h1 = document.createElement('h1');
@@ -261,22 +257,16 @@ function renderSubcategories(data) {
          h1.innerText = `${question.name}`;
          main.appendChild(h1);
       })
-      setTimeout(function() {
-         const abcd = document.querySelector('h1.questions');
-         const firsth3 = document.createElement('h3');
-         firsth3.innerHTML = this.theAnswers[0];
-         const secondh3 = document.createElement('h3');
-         secondh3.innerText = "another test";
-         const thirdh3 = document.createElement('h3');
-         thirdh3.innerText = "and another";
-         const forthh3 = document.createElement('h3');
-         forthh3.innerText = "surprise, another";
 
-         abcd.appendChild(firsth3);
-         abcd.appendChild(secondh3);
-         abcd.appendChild(thirdh3);
-         abcd.appendChild(forthh3);
-      }, 100);
+
+
+      renderAnswers();
+   }
+
+   renderAnswers = () => {
+      fetch("http://localhost:3000/answers/football")
+      .then(resp => resp.json())
+      .then(data => pushResult(data))
 
    }
    // ------------------------------------------//
