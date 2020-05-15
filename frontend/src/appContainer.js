@@ -30,9 +30,56 @@ class AppContainer {
                 Q3: ["Hands", "Elbows", "Knees"],
                 Q4: ["Quarterback", "Dodger", "Blocker"],
                 Q5: ["Like Tree Fiddy", "5 Years", "50 Years"]
+            },
+        action:
+            {
+                Q1: [],
+                Q2: [],
+                Q3: [],
+                Q4: [],
+                Q5: []
+            },
+        fantasy:   
+            {
+                Q1: [],
+                Q2: [],
+                Q3: [],
+                Q4: [],
+                Q5: []
+            },
+        horror:
+            {
+                Q1: [],
+                Q2: [],
+                Q3: [],
+                Q4: [],
+                Q5: []
+            },
+        fps:
+            {
+                Q1: [],
+                Q2: [],
+                Q3: [],
+                Q4: [],
+                Q5: []
+            },
+        rpg:
+            {
+                Q1: [],
+                Q2: [],
+                Q3: [],
+                Q4: [],
+                Q5: []
+            },
+        fighter:
+            {
+                Q1: [],
+                Q2: [],
+                Q3: [],
+                Q4: [],
+                Q5: []
             }
 
     };
-
     url = "http://localhost:3000";
 }

@@ -146,24 +146,15 @@
         answers.forEach((answer) => {
            app.answers.push(answer.description);
         })
-  
-        setTimeout(function() {
-            if(params.toLowerCase() === "football") {
-                renderFootballAnswers(params)
-            } else if(params.toLowerCase() === "basketball") {
-                renderBasketballAnswers(params)
-            } else if(params.toLowerCase() === "soccer") {
-                renderSoccerAnswers(params)
-            }
-        }, 500);
         
+        renderChoices(params)
      }
 
 
      // ANSWERS BELOW //
 
      // FOOTBALL ANSWERS
-     renderFootballAnswers = (params) => {
+     renderChoices = (params) => {
         const choices = document.querySelectorAll('.choice');
         //Q1
         choices[0].innerText = app.answers[0];
@@ -191,64 +182,3 @@
         choices[18].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][1];
         choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
     }
-
-    //BASKETBALL ANSWERS
-    renderBasketballAnswers = (params) => {
-        const choices = document.querySelectorAll('.choice');
-        //Q1
-        choices[0].innerText = app.answers[0];
-        choices[1].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][0];
-        choices[2].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][1];
-        choices[3].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][2];
-        //Q2
-        choices[4].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][0];
-        choices[5].innerText = app.answers[1];
-        choices[6].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][1];
-        choices[7].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][2];
-        //Q3 
-        choices[8].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q3"][0];
-        choices[9].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q3"][1];
-        choices[10].innerText = app.answers[2];
-        choices[11].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q3"][2];
-        //Q4
-        choices[12].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q4"][0];
-        choices[13].innerText = app.answers[3];
-        choices[14].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q4"][1];
-        choices[15].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q4"][2];
-        //Q5
-        choices[16].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][0];
-        choices[17].innerText = app.answers[4];
-        choices[18].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][1];
-        choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
-    }
-
-    // SOCCER ANSWERS
-    renderSoccerAnswers = (params) => {
-        const choices = document.querySelectorAll('.choice');
-        //Q1
-        choices[0].innerText = app.answers[0];
-        choices[1].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][0];
-        choices[2].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][1];
-        choices[3].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][2];
-        //Q2
-        choices[4].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][0];
-        choices[5].innerText = app.answers[1];
-        choices[6].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][1];
-        choices[7].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][2];
-        //Q3 
-        choices[8].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q3"][0];
-        choices[9].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q3"][1];
-        choices[10].innerText = app.answers[2];
-        choices[11].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q3"][2];
-        //Q4
-        choices[12].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q4"][0];
-        choices[13].innerText = app.answers[3];
-        choices[14].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q4"][1];
-        choices[15].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q4"][2];
-        //Q5
-        choices[16].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][0];
-        choices[17].innerText = app.answers[4];
-        choices[18].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][1];
-        choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
-    }
-     // ------------------------------------------//
