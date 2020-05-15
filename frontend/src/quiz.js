@@ -51,6 +51,7 @@
         data.forEach((quizHeader) => {
            const main = document.querySelector('div.quiz-title');
            const h1 = document.createElement('h1');
+
            h1.innerText = `${quizHeader.name}`
            main.appendChild(h1);
         });
@@ -68,6 +69,13 @@
         const main = document.createElement('div');
         main.className = "quiz-questions"
         document.body.appendChild(main);
+
+        const div = document.querySelector('.quiz-questions')
+        const h3 = document.createElement('h3');
+        h3.className = "counter";
+        h3.innerText = "Score: 0";
+
+        div.appendChild(h3);
   
         // Fetches the questions passed in by (data) & executes " renderQuestions(data) "
         fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}/questions`)
@@ -181,4 +189,17 @@
         choices[17].innerText = app.answers[4];
         choices[18].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][1];
         choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
+
+        allChoices = document.querySelectorAll('.choice');
+
+        allChoices.forEach((choice) => {
+            choice.addEventListener('click', function(event) {
+                if(app.answers.includes(choice.innerText)) {
+                    choice.style["background-color"] = "green";
+                    counter = document.querySelector('.counter');
+                    score = parseInt(counter.innerText.split(' ')[1]);
+                    counter.innerText = "Score: " + (score += 20);
+                };
+            }, {once: true});
+        });
     }
