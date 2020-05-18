@@ -169,6 +169,7 @@
         choices[1].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][0];
         choices[2].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][1];
         choices[3].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q1"][2];
+
         //Q2
         choices[4].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q2"][0];
         choices[5].innerText = app.answers[1];
@@ -191,15 +192,28 @@
         choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
 
         allChoices = document.querySelectorAll('.choice');
+        eachQuestion = document.querySelectorAll('.asked-question');
 
         allChoices.forEach((choice) => {
             choice.addEventListener('click', function(event) {
                 if(app.answers.includes(choice.innerText)) {
+                    const thisParent = choice.parentNode.querySelectorAll(".choice")
+                    thisParent.forEach((choice) => {
+                        choice.style["background-color"] = "lightgrey";
+                        choice.style["pointer-events"] = "none";
+                    })
+
                     choice.style["background-color"] = "green";
                     counter = document.querySelector('.counter');
                     score = parseInt(counter.innerText.split(' ')[1]);
                     counter.innerText = "Score: " + (score += 20);
+                } else {
+                    const thisParent = choice.parentNode.querySelectorAll(".choice")
+                    thisParent.forEach((choice) => {
+                        choice.style["background-color"] = "red";
+                        choice.style["pointer-events"] = "none";
+                    })
                 };
-            }, {once: true});
+            }), {once: true};
         });
     }
