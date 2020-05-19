@@ -55,6 +55,18 @@
     font-size: 20px;
 }
 
+.not-finished {
+    background-color: lightgreen;
+    color: white;
+    font-size: 24px;
+}
+
+.finished {
+    background-color: green;
+    color: white;
+    font-size: 24px;
+}
+
 .quiz-title {
     text-align: center;
     background: black;
@@ -83,3 +95,8 @@
         .choice:hover {
             background-color: skyblue;
         }
+
+.completed {
+    text-align: center;
+    border: 1px solid black;
+}

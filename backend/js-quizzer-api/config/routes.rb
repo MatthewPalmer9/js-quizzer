@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :finishedquizzes, only: [:index, :delete, :create]
   resources :questions, only: :index
   resources :subcategories, only: :index
   resources :categories, only: [:index, :show]
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   
   # Sports Quiz Routes #
   get '/quizzes/football' => "quizzes#football"
+  post '/quizzes/football' => "quizzes#create_football"
   get '/quizzes/basketball' => "quizzes#basketball"
   get '/quizzes/soccer' => "quizzes#soccer"
   get '/quizzes/action' => "quizzes#action"
@@ -43,6 +45,9 @@ Rails.application.routes.draw do
   get '/quizzes/rpg/questions/answers' => "quizzes#rpg_answers"
   get '/quizzes/fighter/questions/answers' => "quizzes#fighter_answers"
 
+# Finished Quizzes
+get '/finishedquizzes' => "finishedquizzes#index"
+delete '/finishedquizzes/:id' => "finishedquizzes#destroy"
+post '/finishedquizzes' => "finishedquizzes#create"
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

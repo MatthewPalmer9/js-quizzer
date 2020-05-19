@@ -1,0 +1,2 @@
+class Finishedquiz < ApplicationRecord
+end

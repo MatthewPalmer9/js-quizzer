@@ -95,6 +95,7 @@
            // Then creates an <h1> for each question 
            // with the actual question text inside.
            const main = document.querySelector('div.quiz-questions');
+
            const div = document.createElement('div');
            div.className = "asked-question";
            main.appendChild(div);
@@ -111,6 +112,15 @@
               question.appendChild(choicesDiv);
            })
         })
+
+        const main = document.querySelector('div.quiz-questions');
+        const btn = document.createElement('button');
+        btn.className = "not-finished";
+        btn.innerText = "Submit Quiz"
+        btn.style["pointer-events"] = "none";
+
+        main.appendChild(btn);
+
   
   
         // Renders the multiple choice answers
@@ -191,6 +201,7 @@
         choices[18].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][1];
         choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
 
+
         allChoices = document.querySelectorAll('.choice');
         eachQuestion = document.querySelectorAll('.asked-question');
 
@@ -207,13 +218,25 @@
                     counter = document.querySelector('.counter');
                     score = parseInt(counter.innerText.split(' ')[1]);
                     counter.innerText = "Score: " + (score += 20);
+
+                    const checkScore = document.querySelector('.counter');
+                    if(parseInt(checkScore.innerText.split(' ')[1]) >= 80) {
+                        const getBtn = document.querySelector('.not-finished')
+                        getBtn.className = "finished";
+                        setTimeout(function(){
+                           markComplete(params);
+                        }, 100);
+                        
+
+                        getBtn.style["pointer-events"] = "";
+                    }
                 } else {
-                    const thisParent = choice.parentNode.querySelectorAll(".choice")
-                    thisParent.forEach((choice) => {
-                        choice.style["background-color"] = "red";
-                        choice.style["pointer-events"] = "none";
-                    })
-                };
+                     const thisParent = choice.parentNode.querySelectorAll(".choice")
+                     thisParent.forEach((choice) => {
+                           choice.style["background-color"] = "red";
+                           choice.style["pointer-events"] = "none";
+                     })
+                  };
             }), {once: true};
         });
     }
