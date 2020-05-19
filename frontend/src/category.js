@@ -7,7 +7,7 @@
             document.body.appendChild(main);
      
      
-            fetch(app.url + '/categories')
+            fetch(this.url + '/categories')
             .then(resp => resp.json())
             .then(data => this.renderCategories(data))
      
@@ -70,15 +70,15 @@
 
     renderSubcategory = (params) => {
         if(params === "SPORTS") {
-           fetch("http://localhost:3000" + '/subcategories/sports')
+           fetch(this.url + '/subcategories/sports')
            .then(resp => resp.json())
            .then(data => this.renderSubcategories(data));
         } else if(params === "MOVIES") {
-           fetch("http://localhost:3000" + '/subcategories/movies')
+           fetch(this.url + '/subcategories/movies')
            .then(resp => resp.json())
            .then(data => this.renderSubcategories(data));
         } else if(params === "VIDEO GAMES") {
-           fetch("http://localhost:3000" + '/subcategories/video_games')
+           fetch(this.url + '/subcategories/video_games')
            .then(resp => resp.json())
            .then(data => this.renderSubcategories(data));
         }

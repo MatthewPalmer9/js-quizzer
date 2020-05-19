@@ -81,5 +81,4 @@ class AppContainer {
             }
 
     };
-    url = "http://localhost:3000";
 }

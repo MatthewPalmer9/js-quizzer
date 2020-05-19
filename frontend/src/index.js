@@ -2,6 +2,7 @@ let app = new AppContainer;
 
 subCategoryClickControl = 0;
 theAnswers = [];
+url = `http://localhost:3000`
 
 // -------------------------------------------------//
 
@@ -27,8 +28,6 @@ setTimeout(function() {
    });
 }, 100);
 
-
-url = `http://localhost:3000/finishedquizzes`
 // POST HANDLING
 postFetch = (params) => {
    console.log(params)
@@ -52,7 +51,7 @@ postFetch = (params) => {
 
 // DELETE HANDLING
 deleteFetch = (params) => {
-   fetch(url + `/${params}`, {
+   fetch(url + `/finishedquizzes/${params}`, {
       method: 'DELETE',
       headers: {
          'Content-type': 'application/json'

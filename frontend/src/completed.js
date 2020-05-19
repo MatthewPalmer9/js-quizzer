@@ -1,6 +1,6 @@
 completedFetch = () => {
 
-    fetch("http://localhost:3000/finishedquizzes")
+    fetch(this.url + `/finishedquizzes`)
     .then(resp => resp.json())
     .then(data => renderComplete(data))
     .catch(err => alert(err))

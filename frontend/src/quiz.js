@@ -34,7 +34,7 @@
         removePageContent()
         params = params
   
-        fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}`)
+        fetch(this.url + `/quizzes/${params.toLowerCase()}`)
         .then(resp => resp.json())
         .then(data => renderQuizName(data, params))
     }
@@ -78,7 +78,7 @@
         div.appendChild(h3);
   
         // Fetches the questions passed in by (data) & executes " renderQuestions(data) "
-        fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}/questions`)
+        fetch(this.url + `/quizzes/${params.toLowerCase()}/questions`)
         .then(resp => resp.json())
         .then(data => renderQuestions(data, params))
   
@@ -152,7 +152,7 @@
         });
   
         // Fetches the Answers for this quiz
-        fetch(`http://localhost:3000/quizzes/${params.toLowerCase()}/questions/answers`)
+        fetch(this.url + `/quizzes/${params.toLowerCase()}/questions/answers`)
         .then(resp => resp.json())
         .then(answers => renderAnswers(answers, params))
   
