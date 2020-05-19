@@ -1,12 +1,12 @@
-completedFetch = () => {
+const completedFetch = () => {
 
-    fetch(this.url + `/finishedquizzes`)
+    fetch(url + `/finishedquizzes`)
     .then(resp => resp.json())
     .then(data => renderComplete(data))
     .catch(err => alert(err))
 }
 
-renderComplete = (data) => {
+const renderComplete = (data) => {
     const completed = document.querySelector(".completed");
     data.forEach((completed_quiz) => {
         h2 = document.createElement('h2');
@@ -25,7 +25,7 @@ renderComplete = (data) => {
     });
 }
 
-markComplete = (params) => {
+const markComplete = (params) => {
     const finishBtn = document.querySelector('.finished');
     finishBtn.addEventListener('click', (event) => {
         postFetch(params.toLowerCase());

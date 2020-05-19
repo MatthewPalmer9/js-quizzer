@@ -29,9 +29,9 @@ setTimeout(function() {
 }, 100);
 
 // POST HANDLING
-postFetch = (params) => {
+const postFetch = (params) => {
    console.log(params)
-   fetch(url, {
+   fetch(url + `/finishedquizzes`, {
       method: 'POST',
       headers: {
          'Content-type': 'application/json',
@@ -50,7 +50,7 @@ postFetch = (params) => {
 
 
 // DELETE HANDLING
-deleteFetch = (params) => {
+const deleteFetch = (params) => {
    fetch(url + `/finishedquizzes/${params}`, {
       method: 'DELETE',
       headers: {

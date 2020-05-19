@@ -1,19 +1,19 @@
-    getQuiz = () => {
+    const getQuiz = () => {
         subChild1 = document.querySelector('div.subCategories').children[0];
         subChild2 = document.querySelector('div.subCategories').children[1];
         subChild3 = document.querySelector('div.subCategories').children[2];
 
-        fstQuiz = () => {
+        let fstQuiz = () => {
            params = document.querySelector('div.subCategories').children[0].innerText;
            getQuizName(params);
         }
   
-        sndQuiz = () => {
+        let sndQuiz = () => {
            params = document.querySelector('div.subCategories').children[1].innerText;
            getQuizName(params);
         }
   
-        thrdQuiz = () => {
+        let thrdQuiz = () => {
            params = document.querySelector('div.subCategories').children[2].innerText;
            getQuizName(params);
         }
@@ -23,7 +23,7 @@
         subChild3.addEventListener('click', thrdQuiz, {once: true});
     }
 
-    getQuizName = (params) => {
+    const getQuizName = (params) => {
         removePageContent = () => {
             //Removes the page content and prepares the space for the quiz
             const main = document.querySelector('.categories');
@@ -39,7 +39,7 @@
         .then(data => renderQuizName(data, params))
     }
 
-    renderQuizName = (data, params) => {
+    const renderQuizName = (data, params) => {
 
         params = params;
         //Creates the " <div class="quiz-title"></div> "
@@ -62,7 +62,7 @@
      // ------------------------------------------//
   
      // ------------------------------------------//
-     getQuizQuestions = (data, params) => {
+     const getQuizQuestions = (data, params) => {
         params = params;
   
         // Creates the " <div class="quiz-questions"></div> "
@@ -86,7 +86,7 @@
      // ------------------------------------------//
   
      // ------------------------------------------//
-     renderQuestions = (data, params) => {
+     const renderQuestions = (data, params) => {
   
         // Uses the data to iterate over each question
         data.forEach((question) => 
@@ -127,7 +127,7 @@
         getAnswers(params);
      }
   
-     getAnswers = (params) => {
+     const getAnswers = (params) => {
   
         // Grabs each div.question & creates 4 <h3></h3> to each one
         const questions = document.querySelectorAll('.choices');
@@ -158,7 +158,7 @@
   
      }
   
-     renderAnswers = (answers, params) => {
+     const renderAnswers = (answers, params) => {
         app.answers.length = 0;
   
         answers.forEach((answer) => {
@@ -172,7 +172,7 @@
      // ANSWERS BELOW //
 
      // FOOTBALL ANSWERS
-     renderChoices = (params) => {
+     const renderChoices = (params) => {
         const choices = document.querySelectorAll('.choice');
         //Q1
         choices[0].innerText = app.answers[0];
