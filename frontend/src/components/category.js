@@ -7,16 +7,13 @@ class Category {
     
    getOrRemoveCategories() {
       if(app.categoryClickControl === 0) {
+         const c = new CategoryFetch();
          let main = document.createElement("div");
          main.className += 'categories';
          document.body.appendChild(main);
      
      
-         fetch(this.url + '/categories')
-         .then(resp => resp.json())
-         .then(data => this.renderCategories(data))
-     
-         .catch(err => alert(err));
+         c.mainFetcher('/categories');
      
          app.categoryClickControl += 1;
      
@@ -76,18 +73,13 @@ class Category {
    }
 
    renderSubcategory(params) {
+      const subcat = new CategoryFetch();
       if(params === "SPORTS") {
-         fetch(this.url + '/subcategories/sports')
-         .then(resp => resp.json())
-         .then(data => this.renderSubcategories(data));
+         subcat.subFetcher('/subcategories/sports');
       } else if(params === "MOVIES") {
-         fetch(this.url + '/subcategories/movies')
-         .then(resp => resp.json())
-         .then(data => this.renderSubcategories(data));
+         subcat.subFetcher('/subcategories/movies');
       } else if(params === "VIDEO GAMES") {
-         fetch(this.url + '/subcategories/video_games')
-         .then(resp => resp.json())
-         .then(data => this.renderSubcategories(data));
+         subcat.subFetcher('/subcategories/video_games');
       }
    }
 
