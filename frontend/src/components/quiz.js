@@ -11,7 +11,7 @@ class Quiz {
       const subChild3 = document.querySelector('div.subCategories').children[2];
 
       let fstQuiz = () => {
-         const params = subChild1.innerText;
+         let params = document.querySelector('div.subCategories').children[0].innerText;
          this.getQuizName(params);
       }
 
@@ -31,7 +31,7 @@ class Quiz {
    }
 
    getQuizName(params) {
-      function removePageContent() {
+      const removePageContent = () => {
          //Removes the page content and prepares the space for the quiz
          const main = document.querySelector('.categories');
          const subMain = document.querySelector('.subCategories');
@@ -207,8 +207,8 @@ class Quiz {
       choices[19].innerText = app.fakeAnswers[`${params.toLowerCase()}`]["Q5"][2];
 
 
-      const allChoices = document.querySelectorAll('.choice');
-      const eachQuestion = document.querySelectorAll('.asked-question');
+      let allChoices = document.querySelectorAll('.choice');
+      let eachQuestion = document.querySelectorAll('.asked-question');
 
       allChoices.forEach((choice) => {
          choice.addEventListener('click', function (event) {
