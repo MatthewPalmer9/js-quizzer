@@ -1,8 +1,12 @@
-class AppContainer {
+class App {
     categories = [];
     categoryClickControl = 0;
     subCategoryClickControl = 0;
 
+    constructor(name) {
+        this.name = name;
+        this.url = "http://localhost:3000"
+    }
 
     // Answers
     answers = [];
@@ -81,4 +85,18 @@ class AppContainer {
             }
 
     };
+
+    start() {
+        const category = new Category();
+        const btn = document.querySelector('#getQuizzesBtn');
+        btn.addEventListener('click', () =>
+            category.getOrRemoveCategories()
+        );
+
+        btn.addEventListener('click', () =>(
+            setTimeout(function(){
+                category.setCategory()
+            }, 90)
+        ));
+    }
 }

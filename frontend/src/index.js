@@ -1,27 +1,20 @@
-let app = new AppContainer;
+const app = new App();
+app.start()
+
 
 subCategoryClickControl = 0;
 theAnswers = [];
-url = `http://localhost:3000`
+const url = `http://localhost:3000`
 
 // -------------------------------------------------//
 
+// APP START
 // BUTTON / EVENT HANDLING
-btn = document.querySelector('#getQuizzesBtn');
-btn.addEventListener('click', () =>
-   getOrRemoveCategories()
-);
-
-btn.addEventListener('click', () =>(
-   setTimeout(function(){
-      setCategory()
-   }, 90)
-));
 
 setTimeout(function() {
    buttons = document.querySelectorAll('h2 button');
    buttons.forEach((bttn) => {
-      btn.addEventListener('click', (event) => {
+      bttn.addEventListener('click', (event) => {
          params = `${bttn.className}`
          deleteFetch(params);
       });
