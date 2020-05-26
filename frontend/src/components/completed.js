@@ -33,8 +33,9 @@ class Completed {
 
     markComplete(params) {
         const finishBtn = document.querySelector('.finished');
+        const finish = new PostFetch();
         finishBtn.addEventListener('click', (event) => {
-            postFetch(params.toLowerCase());
+            finish.postFetch(params.toLowerCase());
             location.reload();
         })
     }
