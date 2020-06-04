@@ -16,12 +16,12 @@ class Quiz {
       }
 
       let sndQuiz = () => {
-         const params = document.querySelector('div.subCategories').children[1].innerText;
+         let params = document.querySelector('div.subCategories').children[1].innerText;
          this.getQuizName(params);
       }
 
       let thrdQuiz = () => {
-         const params = document.querySelector('div.subCategories').children[2].innerText;
+         let params = document.querySelector('div.subCategories').children[2].innerText;
          this.getQuizName(params);
       }
 

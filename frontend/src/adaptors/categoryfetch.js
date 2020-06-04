@@ -19,7 +19,7 @@ class CategoryFetch {
         fetch(this.url + `${params}`)
         .then(resp => resp.json())
         .then(data => c.renderSubcategories(data))
-        .catch(err => alert(err));
+        // .catch(err => alert(err));
     }
 
     quizFetcher(params) {

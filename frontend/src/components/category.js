@@ -109,7 +109,7 @@ class Category {
 
          } else if(app.subCategoryClickControl === 1) {
             if(data === currentData[0]) {
-               destroy = () => {
+               const destroy = () => {
                   const subCat = document.querySelector('.subCategories');
                   subCat.parentNode.removeChild(subCat);
                   app.subCategoryClickControl = 0;
