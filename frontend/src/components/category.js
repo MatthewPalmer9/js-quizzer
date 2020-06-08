@@ -91,6 +91,51 @@ class Category {
          let subMain = document.createElement("div")
          subMain.className = "subCategories";
          document.body.appendChild(subMain);
+
+         const subcats = document.querySelector('.categories');
+         const sortBtn = document.createElement('button');
+         sortBtn.className = 'sortBtn';
+         sortBtn.innerHTML = 'Sort!';
+
+         sortBtn.addEventListener('click', function(event){
+            event.preventDefault();
+            const btns = document.querySelectorAll('.subCategory');
+            let textArray = [];
+
+            
+            btns.forEach((btn) => {
+               textArray.push(btn.innerText)
+            })
+
+            const destroy = () => {
+               const subCat = document.querySelector('.subCategories');
+               subCat.parentNode.removeChild(subCat);
+               app.subCategoryClickControl = 0;
+               currentData.pop();
+            }
+            destroy()
+
+            const main = document.querySelector('body')
+            const newSubCat = document.createElement('div');
+            newSubCat.className = "subCategories";
+            main.appendChild(newSubCat);
+            
+
+            let newArray = textArray.sort();
+            newArray.forEach((subcat) => {
+               const subCat = document.createElement('h4');
+               subCat.className = "subCategory";
+               subCat.innerText = `${subcat.toUpperCase()}`
+
+               newSubCat.appendChild(subCat);
+            })
+
+            console.log(textArray.sort())
+         }, false);
+
+
+         subcats.appendChild(sortBtn);
+
      
          data.forEach((subCat) => {
             const h4 = document.createElement('h4');
